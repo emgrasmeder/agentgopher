@@ -23,4 +23,11 @@ var _ = Describe("Model", func() {
 			})
 		})
 	})
+	Describe("Model runs to completion", func() {
+		Context("given a finite life of 10 steps", func() {
+			It("should do 10 steps and end", func() {
+				Expect(model).NotTo(BeNil())
+			})
+		})
+	})
 })
