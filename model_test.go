@@ -24,9 +24,32 @@ var _ = Describe("Model", func() {
 		})
 	})
 	Describe("Model runs to completion", func() {
-		Context("given a finite life of 10 steps", func() {
-			It("should do 10 steps and end", func() {
-				Expect(model).NotTo(BeNil())
+		Context("given a Run call", func() {
+			BeforeEach(func() {
+				model.Run()
+			})
+			It("should end after running", func() {
+				Expect(model.IsDone()).To(Equal(true))
+			})
+		})
+		Context("given a Run call with 10 steps", func() {
+			var steps int
+			BeforeEach(func() {
+				steps = 10
+				model.SetMaxSteps(steps)
+				model.Run()
+			})
+			It("should end and be 10 steps old", func() {
+				Expect(model.StepsCompleted()).To(Equal(steps))
+			})
+		})
+	})
+	Describe("Step function advances the model one step", func() {
+		Context("when the step function is called", func() {
+			It("should advance the Steps Completed one step", func() {
+				Expect(model.StepsCompleted()).To(Equal(0))
+				model.Step()
+				Expect(model.StepsCompleted()).To(Equal(1))
 			})
 		})
 	})
