@@ -7,8 +7,14 @@ import (
 
 var testTemplate *template.Template
 
+type Widget struct {
+	Name  string
+	Price int
+}
+
 type ViewData struct {
-	Name string
+	Name    string
+	Widgets []Widget
 }
 
 func main() {
@@ -25,8 +31,14 @@ func main() {
 func handler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 
-	vd := ViewData{"John Schmidt"}
-	err := testTemplate.Execute(w, vd)
+	err := testTemplate.Execute(w, ViewData{
+		Name: "John Schmidt",
+		Widgets: []Widget{
+			Widget{"Red Widget", 12},
+			Widget{"Blue Widget", 120},
+			Widget{"Green Widget", 102},
+		},
+	})
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
