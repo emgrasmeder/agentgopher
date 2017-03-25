@@ -18,28 +18,11 @@ type ViewData struct {
 }
 
 func main() {
-	var err error
-	testTemplate, err = template.ParseFiles("hello.gohtml")
-	if err != nil {
-		panic(err)
-	}
-
 	http.HandleFunc("/", handler)
+	http.Handle("/resources/", http.StripPrefix("/resources/", http.FileServer(http.Dir("resources"))))
 	http.ListenAndServe(":3000", nil)
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "text/html")
-
-	err := testTemplate.Execute(w, ViewData{
-		Name: "John Schmidt",
-		Widgets: []Widget{
-			Widget{"Red Widget", 12},
-			Widget{"Blue Widget", 120},
-			Widget{"Green Widget", 102},
-		},
-	})
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
+	template.Must(template.ParseFiles("index.html")).Execute(w, nil)
 }

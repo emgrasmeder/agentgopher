@@ -1,0 +1,10 @@
+div.square {
+    border: solid 21px red;
+    width: 10px;
+    height: 10px;
+    background-color: red;
+}
+body {
+    background:white;
+    color:black;
+}
