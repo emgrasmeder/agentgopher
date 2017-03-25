@@ -1,0 +1,6 @@
+runner.conf
+**/tmp/
+*/tmp/
+display/tmp
+display/tmp/*
+display/tmp/runner-build
