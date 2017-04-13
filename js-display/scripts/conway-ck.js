@@ -1,16 +1,13 @@
-function writeCustomPickle(e) {
+function writeCustomPickle(cells) {
     var t = "",
         n = "";
-    if (e.length % hashLength !== 0) throw "Total cells must be divisble by 16 (or whatever hashLength equals)!";
-    for (var r = 0; r < e.length; r++) t += String(e[r].value);
-    debug && console.log(t);
+    if (cells.length % hashLength !== 0) throw "Total cells must be divisble by 16 (or whatever hashLength equals)!";
+    for (var r = 0; r < cells.length; r++) t += String(e[r].value);
     var i = "",
         s = "";
     for (var o = 0; o < t.length / hashLength; o++) {
         i = t.slice(o * hashLength, (o + 1) * hashLength);
-        debug && console.log(i);
         s = parseInt(i, 2).toString(36);
-        debug && console.log(s);
         n.length === 0 ? n = s : n = n + "-" + s;
         s = ""
     }
@@ -91,8 +88,6 @@ function initData(e, t, n, r, i, s, o) {
 }
 
 
-
-
 function drawGrid(e, t, n, r, i, s, o, u, a, f, l, c, h, p, d) {
     function A() {
         txt = g.text();
@@ -100,29 +95,7 @@ function drawGrid(e, t, n, r, i, s, o, u, a, f, l, c, h, p, d) {
         g.text(newtxt)
     }
 
-    function O() {
-        g.text("0")
-    }
-
-    function M() {
-        function n() {
-            t = conwayStep(t);
-            b.transition().delay(o * .1).duration(o * .9).attr("fill", function(e, t) {
-                return y(e.value)
-            });
-            A();
-            e += 1
-        }
-        var e = 0;
-        if (S) {
-            debug && console.log("interval cleared");
-            clearInterval(S)
-        }
-        S = setInterval(n, o)
-    }
-
     function _() {
-        O();
         for (var e = 0; e < t.length; e++) t[e].value = 0;
         b.transition().delay(0).duration(1e3).attr("fill", function(e, t) {
             return y(e.value)
@@ -131,7 +104,6 @@ function drawGrid(e, t, n, r, i, s, o, u, a, f, l, c, h, p, d) {
     }
 
     function D() {
-        O();
         for (var e = 0; e < t.length; e++) t[e].value = d3.round(Math.random() * .6);
         b.transition().delay(o * .1).duration(o * .9).attr("fill", function(e, t) {
             return y(e.value)
@@ -139,7 +111,6 @@ function drawGrid(e, t, n, r, i, s, o, u, a, f, l, c, h, p, d) {
     }
 
     function P() {
-        O();
         hash = jQuery(location).attr("hash");
         if (hash.length !== 0) {
             t = readCustomPickle(hash, t);
@@ -183,8 +154,6 @@ function drawGrid(e, t, n, r, i, s, o, u, a, f, l, c, h, p, d) {
                     }
                 })
             }
-            debug && console.log("Value is:");
-            debug && console.log(val)
         }).on("mouseout", function() {
             element = d3.select(this);
             element.attr("fill", function(e, t) {
@@ -201,16 +170,13 @@ function drawGrid(e, t, n, r, i, s, o, u, a, f, l, c, h, p, d) {
         if (E === 0) {
             M(S);
             E = 1;
-            debug && console.log("Starting...")
-        } else E === 1 && debug && console.log("Cannot start -- already running.")
+        }
     });
     var x = d3.select(a);
     x.on("click", function() {
-        if (E === 0) debug && console.log("Cannot stop -- not running.");
-        else if (E === 1) {
+        if (E === 1) {
             clearInterval(S);
             E = 0;
-            debug && console.log("Stopped running simulation.")
         }
     });
     var T = d3.select(f);
@@ -219,10 +185,8 @@ function drawGrid(e, t, n, r, i, s, o, u, a, f, l, c, h, p, d) {
             clearInterval(S);
             E = 0;
             _();
-            debug && console.log("Stopped and reset.")
         } else if (E === 0) {
             _();
-            debug && console.log("Reset already stopped sim.")
         }
     });
     var N = d3.select(l);
@@ -231,10 +195,8 @@ function drawGrid(e, t, n, r, i, s, o, u, a, f, l, c, h, p, d) {
             clearInterval(S);
             E = 0;
             D();
-            debug && console.log("Stopped and random data added.")
         } else if (E === 0) {
             D();
-            debug && console.log("Random data replacing stopped board.")
         }
     });
     var C = d3.select(h);
@@ -244,13 +206,9 @@ function drawGrid(e, t, n, r, i, s, o, u, a, f, l, c, h, p, d) {
             E = 0;
             hash = writeCustomPickle(t);
             window.location.hash = hash;
-            debug && console.log(hash);
-            debug && console.log("Stopped and saved")
         } else if (E === 0) {
             hash = writeCustomPickle(t);
             window.location.hash = hash;
-            debug && console.log(hash);
-            debug && console.log("Saved data")
         }
     });
     var k = d3.select(p);
@@ -259,10 +217,8 @@ function drawGrid(e, t, n, r, i, s, o, u, a, f, l, c, h, p, d) {
             clearInterval(S);
             E = 0;
             P();
-            debug && console.log("Stopped and loaded")
         } else if (E === 0) {
             P();
-            debug && console.log("Loaded data")
         }
     });
     var L = d3.select(d);
@@ -278,32 +234,21 @@ function drawGrid(e, t, n, r, i, s, o, u, a, f, l, c, h, p, d) {
                 href2 = href.split("#");
                 href3 = href2[0] + "%23" + href2[1]
             } else href3 = href;
-            link = "https://twitter.com/intent/tweet?url=" + href3;
             element.attr("href", link);
-            debug && console.log(href);
-            debug && console.log("Stopped and tweeted")
         } else if (E === 0) {
             hash = writeCustomPickle(t);
             window.location.hash = hash;
             href = window.location.href;
-            console.log(hash);
-            console.log(href);
-            console.log(hash.length);
             if (hash.length > 0) {
                 href2 = href.split("#");
                 href3 = href2[0] + "%23" + href2[1] + "&"
             } else href3 = href + "&";
-            console.log(href3);
-            link = "https://twitter.com/intent/tweet?url=" + href3;
             element.attr("href", link);
-            debug && console.log(href);
-            debug && console.log("Stopped and tweeted")
         }
     })
 }
 
 var hashLength = 16,
-    debug = !1,
     strokeColor = "#444444",
     color1 = "#bdbed8",
     color2 = "#262958";
