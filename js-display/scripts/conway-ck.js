@@ -1,12 +1,4 @@
 function drawGrid(e, t, n, r, i, s, o, u, a, f, l, c, h, p, d) {
-    function _() {
-        for (var e = 0; e < t.length; e++) t[e].value = 0;
-        b.transition().delay(0).duration(1e3).attr("fill", function(e, t) {
-            return y(e.value)
-        });
-        window.location.hash = ""
-    }
-
     function D() {
         for (var e = 0; e < t.length; e++) t[e].value = d3.round(Math.random() * .6);
         b.transition().delay(o * .1).duration(o * .9).attr("fill", function(e, t) {
@@ -88,9 +80,7 @@ function drawGrid(e, t, n, r, i, s, o, u, a, f, l, c, h, p, d) {
         if (E === 1) {
             clearInterval(S);
             E = 0;
-            _();
         } else if (E === 0) {
-            _();
         }
     });
     var N = d3.select(l);
