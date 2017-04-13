@@ -1,100 +1,4 @@
-function writeCustomPickle(cells) {
-    var t = "",
-        n = "";
-    if (cells.length % hashLength !== 0) throw "Total cells must be divisble by 16 (or whatever hashLength equals)!";
-    for (var r = 0; r < cells.length; r++) t += String(e[r].value);
-    var i = "",
-        s = "";
-    for (var o = 0; o < t.length / hashLength; o++) {
-        i = t.slice(o * hashLength, (o + 1) * hashLength);
-        s = parseInt(i, 2).toString(36);
-        n.length === 0 ? n = s : n = n + "-" + s;
-        s = ""
-    }
-    return n
-}
-
-function readCustomPickle(e, t) {
-    var n = e.split("-"),
-        r = "",
-        i = "",
-        s = "0000000000000000";
-    for (var o = 0; o < n.length; o++) {
-        i = parseInt(n[o], 36).toString(2);
-        len = i.length;
-        len < hashLength && (i = s.slice(0, hashLength - len) + i);
-        r += i
-    }
-    for (var u = 0; u < t.length; u++) r[u] === "1" ? t[u].value = 1 : t[u].value = 0;
-    return t
-}
-
-function initData(e, t, n, r, i, s, o) {
-    var u = [],
-        a = 0,
-        f = 0;
-    s !== null && (a = s);
-    o !== null && (f = o);
-    var l = 0,
-        c = 0,
-        h = 0,
-        p = 0,
-        d = n,
-        v = r,
-        m = e * t,
-        g = e - 1,
-        y = t - 1,
-        b, w, E, S, x, T, N, C;
-    for (var k = 0; k < m; k++) {
-        if (c === 0) {
-            b = -1;
-            w = -1;
-            E = -1
-        } else {
-            l % (g + 1) === 0 ? b = -1 : b = p - (g + 2);
-            w = p - (g + 1);
-            l === g ? E = -1 : E = p - (g + 0)
-        }
-        S = p - 1;
-        l === g ? x = -1 : x = p + 1;
-        if (c === y) {
-            T = -1;
-            N = -1;
-            C = -1
-        } else {
-            l % (g + 1) === 0 ? T = -1 : T = p + (g + 0);
-            N = p + (g + 1);
-            l === g ? C = -1 : C = p + (g + 2)
-        }
-        neighbors = [b, w, E, S, x, T, N, C];
-        s = l * d + a;
-        o = c * v + f;
-        dataItem = {
-            value: h,
-            x: s,
-            y: o,
-            ns: neighbors,
-            count: p
-        };
-        u.push(dataItem);
-        p += 1;
-        if (l === g) {
-            l = 0;
-            c += 1
-        } else l += 1
-    }
-    i.length > 0 && (u = readCustomPickle(i, u));
-    return u
-}
-
-
 function drawGrid(e, t, n, r, i, s, o, u, a, f, l, c, h, p, d) {
-    function A() {
-        txt = g.text();
-        newtxt = String(parseInt(txt, 10) + 1);
-        g.text(newtxt)
-    }
-
     function _() {
         for (var e = 0; e < t.length; e++) t[e].value = 0;
         b.transition().delay(0).duration(1e3).attr("fill", function(e, t) {
@@ -248,7 +152,7 @@ function drawGrid(e, t, n, r, i, s, o, u, a, f, l, c, h, p, d) {
     })
 }
 
-var hashLength = 16,
-    strokeColor = "#444444",
-    color1 = "#bdbed8",
-    color2 = "#262958";
+var hashLength = 16;
+var strokeColor = "#b3deff";
+var color1 = "#caccd5";
+var color2 = "#0074cc";
