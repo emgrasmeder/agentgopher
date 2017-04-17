@@ -6,8 +6,8 @@ var i = 0
 
 function tick() {
 	// getJSON queries across http for a JSON object
-	$.getJSON("localhost:8080/", function(data) {
-  		$("#display").html(data + " " + i)
+	$.getJSON("/helloworld.json", function(data) {
+  		$("#display").html(JSON.stringify(data.Hello) + " " + i)
 	})
 	i++
 
@@ -15,6 +15,5 @@ function tick() {
 }
 
 $( window ).ready(function() {
-	alert("hello world");
-	setTimeout(tick, 1000)
+	setTimeout(tick, 2000)
 })
