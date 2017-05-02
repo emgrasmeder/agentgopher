@@ -6,6 +6,7 @@ var i = 0
 
 function tick() {
 	// getJSON queries across http for a JSON object
+	
 	$.getJSON("/helloworld.json", function(data) {
   		$("#display").html(JSON.stringify(data.Hello) + " " + i)
 	})
