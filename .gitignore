@@ -1,3 +1,4 @@
 **/*.swp
 .eslintrc.json
 node_modules/
+.idea/
