@@ -1,0 +1,10 @@
+.cell {
+    visibility: visible;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-color: cadetblue;
+    left: 5px;
+    top: 5px;
+}
