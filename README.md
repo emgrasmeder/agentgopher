@@ -1,4 +1,4 @@
-# go-abm
+# Agent Gopher 🕵️‍♀️
 Agent Based Model framework for Golang
 
 The goal of this project is to make a generic agent based modeling framework in golang. It is/will be heavily inspired by the [Mesa project for Python 3+](https://github.com/projectmesa)
