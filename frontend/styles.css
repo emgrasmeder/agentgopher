@@ -6,8 +6,6 @@
 
 .cell {
     visibility: visible;
-    position: relative;
-    display: inline-block;
     background-color: cadetblue;
     float:left;
     width: 30%;
