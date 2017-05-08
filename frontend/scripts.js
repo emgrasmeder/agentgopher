@@ -1,6 +1,6 @@
 function hideToggle() {
     console.log("hello world")
-    document.getElementById('box').style.visibility = "hidden";
+    document.getElementById('box5').style.visibility = "hidden";
 }
 
 function incrementValue() {
