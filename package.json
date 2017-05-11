@@ -13,7 +13,7 @@
     "tap": "^10.3.2"
   },
   "scripts": {
-    "test": "tap test/*.test.js"
+    "test": "tap frontend/test/*.test.js"
   },
   "repository": {
     "type": "git",
