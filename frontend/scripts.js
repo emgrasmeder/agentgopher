@@ -1,9 +1,12 @@
-function hideToggle() {
-    console.log("hello world")
-    document.getElementById('box').style.visibility = "hidden";
+var hideToggle = function (element) {
+    if (element.className == "redCell") {
+        element.className = "cell";
+    } else {
+        element.className = "redCell";
+    }
 }
 
-function incrementValue() {
+var incrementValue = function() {
     var value = parseInt(document.getElementById('number').value, 10);
     value = isNaN(value) ? 0 : value;
     value++;
@@ -12,3 +15,5 @@ function incrementValue() {
         hideToggle();
     }
 }
+
+module.exports = {hideToggle, incrementValue};

@@ -1,10 +1,20 @@
+.field {
+    border: 3px solid black;
+    width: 100px;
+    height: 100px;
+}
+
 .cell {
-    visibility: visible;
-    position: relative;
-    width: 20px;
-    height: 20px;
-    display: inline-block;
     background-color: cadetblue;
-    left: 5px;
-    top: 5px;
+    float:left;
+    width: 30%;
+    padding-bottom: 30%; /* = width for a 1:1 aspect ratio */
+    margin:1.66%;
+}
+.redCell {
+    background-color: white;
+    float:left;
+    width: 30%;
+    padding-bottom: 30%; /* = width for a 1:1 aspect ratio */
+    margin:1.66%;
 }
