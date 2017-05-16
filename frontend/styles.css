@@ -5,8 +5,14 @@
 }
 
 .cell {
-    visibility: visible;
     background-color: cadetblue;
+    float:left;
+    width: 30%;
+    padding-bottom: 30%; /* = width for a 1:1 aspect ratio */
+    margin:1.66%;
+}
+.redCell {
+    background-color: white;
     float:left;
     width: 30%;
     padding-bottom: 30%; /* = width for a 1:1 aspect ratio */

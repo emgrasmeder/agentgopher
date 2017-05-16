@@ -1,6 +1,9 @@
-function hideToggle() {
-    console.log("hello world")
-    document.getElementById('box5').style.visibility = "hidden";
+function hideToggle(element) {
+    if (element.className == "redCell") {
+        element.className = "cell";
+    } else {
+        element.className = "redCell";
+    }
 }
 
 function incrementValue() {
