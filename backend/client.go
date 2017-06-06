@@ -21,7 +21,7 @@ func main() {
 	signal.Notify(interrupt, os.Interrupt)
 
 	u := url.URL{Scheme: "ws", Host: *addr, Path: "/echo"}
-	log.Printf("connecting to %s", u.String()) //localhost:8080
+	log.Printf("Connecting to %s", u.String()) //localhost:8080
 
 	c, _, err := websocket.DefaultDialer.Dial(u.String(), nil)
 	if err != nil {
@@ -38,7 +38,7 @@ func main() {
 		for {
 			_, message, err := c.ReadMessage()
 			if err != nil {
-				log.Println("read:", err)
+				log.Println("ERROR:", err)
 				return
 			}
 			log.Printf("Received: %s", message)

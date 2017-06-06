@@ -11,7 +11,8 @@
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
     "nodemon": "^1.11.0",
-    "tap": "^10.3.2"
+    "tap": "^10.3.2",
+    "ws": "^3.0.0"
   },
   "scripts": {
     "test": "tap frontend/test/*.test.js"
