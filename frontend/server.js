@@ -1,18 +1,23 @@
-const http = require('http');
-const net = require('net');
-const url = require('url');
+// Create a socket instance
+var socket = new WebSocket('ws://localhost:3000');
 
-// Create an HTTP tunneling conn
-const conn = http.createServer((req, res) => {
-    res.writeHead(200, {'Content-Type': 'text/plain'});
-res.end('okay\n');
-});
+// Open the socket
+socket.onopen = function(event) {
 
-conn.on('connect', (req, cltSocket, head) => {
-  console.log('connection acquired')
-});
+  // Send an initial message
+  socket.send('I am the client and I\'m listening!');
 
-// now that conn is running
-conn.listen(8080, '127.0.0.1', () => {
-  console.log('listening')
-});
+  // Listen for messages
+  socket.onmessage = function(event) {
+    console.log('Client received a message',event);
+  };
+
+  // Listen for socket closes
+  socket.onclose = function(event) {
+    console.log('Client notified socket has closed',event);
+  };
+
+  // To close the socket....
+  socket.close()
+
+};
