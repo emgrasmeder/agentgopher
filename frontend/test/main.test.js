@@ -1,11 +1,10 @@
-var tap = require('tap');
-var scripts = require('../scripts');
+import { hideToggle } from '../scripts';
 
-tap.test("unit test for hideToggle", function (t) {
-  var element = { className: 'redCell' };
-  scripts.hideToggle(element);
-  t.isEqual(element.className, 'cell')
-  scripts.hideToggle(element);
-  t.isEqual(element.className, 'redCell')
-  t.end();
-})
+
+test('adds 1 + 2 to equal 3', () => {
+  const element = { className: 'redCell' };
+  hideToggle(element);
+  expect(element.className).toEqual('cell');
+  hideToggle(element);
+  expect(element.className).toEqual('redCell');
+});
