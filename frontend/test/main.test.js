@@ -1,4 +1,4 @@
-import { hideToggle } from '../src/scripts';
+import { hideToggle } from '../src/app';
 
 test('adds 1 + 2 to equal 3', () => {
   const element = { className: 'redCell' };
