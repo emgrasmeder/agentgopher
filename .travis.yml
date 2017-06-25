@@ -1,3 +1,5 @@
 language: node_js
 node_js:
   - "7"
+before_script:
+  - webpack --config frontend/webpack.config.js
