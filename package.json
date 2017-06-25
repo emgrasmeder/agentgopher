@@ -10,11 +10,12 @@
     "babel-preset-env": "^1.5.1",
     "jest": "^20.0.4",
     "nodemon": "^1.11.0",
+    "webpack": "^3.0.0",
     "ws": "^3.0.0"
   },
   "scripts": {
     "test": "jest",
-    "build" : "webpack"
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
