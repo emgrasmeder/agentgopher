@@ -11,7 +11,7 @@
     padding-bottom: 30%; /* = width for a 1:1 aspect ratio */
     margin:1.66%;
 }
-.redCell {
+.invisibleCell {
     background-color: white;
     float:left;
     width: 30%;

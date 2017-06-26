@@ -1,9 +1,9 @@
 import { hideToggle } from '../src/app';
 
-test('adds 1 + 2 to equal 3', () => {
-  const element = { className: 'redCell' };
+test('should toggle between visibile and invisible on click', () => {
+  const element = { className: 'invisibleCell' };
   hideToggle(element);
   expect(element.className).toEqual('cell');
   hideToggle(element);
-  expect(element.className).toEqual('redCell');
+  expect(element.className).toEqual('invisibleCell');
 });

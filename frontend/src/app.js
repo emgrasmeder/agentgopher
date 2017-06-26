@@ -1,8 +1,8 @@
 export const hideToggle = function (element) {
-    if (element.className == "redCell") {
+    if (element.className == "invisibleCell") {
         element.className = "cell";
     } else {
-        element.className = "redCell";
+        element.className = "invisibleCell";
     }
 }
 
