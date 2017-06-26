@@ -1,8 +1,8 @@
 package main
 
 import (
-	"net/http"
 	"encoding/json"
+	"net/http"
 )
 
 func main() {
@@ -12,17 +12,16 @@ func main() {
 	http.ListenAndServe(":8080", nil)
 }
 
-
 func deliverFile(w http.ResponseWriter, r *http.Request) {
-	type File struct{
+	type File struct {
 		Hello string
 	}
-	f := File{"world!"} 
+	f := File{"world!"}
 
 	js, err := json.Marshal(f)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
-	return
+		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")

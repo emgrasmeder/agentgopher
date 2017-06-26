@@ -1,12 +1,12 @@
-var hideToggle = function (element) {
-    if (element.className == "redCell") {
+export const hideToggle = function (element) {
+    if (element.className == "invisibleCell") {
         element.className = "cell";
     } else {
-        element.className = "redCell";
+        element.className = "invisibleCell";
     }
 }
 
-var incrementValue = function() {
+export const incrementValue = function() {
     var value = parseInt(document.getElementById('number').value, 10);
     value = isNaN(value) ? 0 : value;
     value++;
@@ -15,5 +15,3 @@ var incrementValue = function() {
         hideToggle();
     }
 }
-
-module.exports = {hideToggle, incrementValue};
