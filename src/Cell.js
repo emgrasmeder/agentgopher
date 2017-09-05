@@ -15,7 +15,7 @@ class Cell extends Component {
 
   render() {
     return (
-      <div
+      <div className="cell"
         style={styles.cell(this.state.hidden)}
         onClick={this.handleClick}
       >
