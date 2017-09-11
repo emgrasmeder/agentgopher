@@ -1,10 +1,11 @@
 {
-  "name": "agentgopher2",
+  "name": "agentgopher",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "react": "^15.6.1",
-    "react-scripts": "1.0.13"
+    "react-scripts": "1.0.13",
+    "react-websocket": "^1.1.7"
   },
   "scripts": {
     "start": "react-scripts start",
