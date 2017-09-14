@@ -1,45 +1,36 @@
 import React, { Component } from 'react';
 import Grid from './Grid.js';
-// import Websocket from 'react-websocket';
+// import WebSocket from 'ws';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       messages: [],
+      timestamp: 'no timestamp yet',
     };
-    console.log('setting up websocket...', this.state)
-    this.handleData = this.handleData.bind(this)
+    this.socket = new WebSocket('ws://localhost:8080/echo');
   }
 
   componentDidMount() {
-    // this is an "echo" websocket service for testing pusposes
-    this.connection = new WebSocket('wss://localhost:3000');
-    // listen to onmessage event
-    this.connection.onmessage = evt => {
-      // add the new message to state
-      this.setState({
-        messages: this.state.messages.concat([evt.data])
-      })
-    };
+    this.socket.onmessage = (message) => {
+      const messageData = JSON.stringify(message);
 
-    // for testing: sending a message to the echo service every 2 seconds,
-    // the service sends it right back
-    setInterval(_ => {
-      this.connection.send(Math.random())
-    }, 2000)
+      console.log(messageData);
+    }
+
+    // Give some time for socket to establish connection
+    setTimeout(() => {
+      this.socket.send('Hello World!');
+    }, 3000);
+
   }
 
-  handleData(data) {
-    let result = JSON.parse(data);
-    this.setState({ messages: result });
-  }
 
   render() {
     return (
       <div >
-        {/*<Websocket url='ws://localhost:3000/stream/'*/}
-                   {/*onMessage={this.handleData} />*/}
+        This is the timer value: {this.state.timestamp}
         Agent Gopher!
         <Grid />
         <ul >
