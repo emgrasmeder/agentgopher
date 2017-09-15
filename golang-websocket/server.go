@@ -21,7 +21,7 @@ func echo(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Handling connection from client...")
 	socket, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
-		log.Print("upgrade error: ", err)
+		log.Print("Error upgrading client to websocket connection: ", err)
 		return
 	}
 	defer socket.Close()
@@ -32,7 +32,7 @@ func echo(w http.ResponseWriter, r *http.Request) {
 			break
 		}
 		log.Printf("Received message from client %s", message)
-		err = socket.WriteMessage(messageType, message)
+		err = socket.WriteMessage(messageType, []byte("some message"))
 		if err != nil {
 			log.Println("write:", err)
 			break
