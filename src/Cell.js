@@ -9,7 +9,6 @@ class Cell extends Component {
   }
 
   handleClick = () => {
-    console.log(this.state);
     this.setState({hidden: !this.state.hidden});
   };
 
