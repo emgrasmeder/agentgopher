@@ -1,6 +1,6 @@
 const styles = {};
 
-const gridSize = 100;
+const gridSize = 486;
 
 styles.grid = {
   height: gridSize,
@@ -8,11 +8,11 @@ styles.grid = {
   border: '3px solid black',
 };
 
-const cellMargin = 4;
+const cellMargin = 1;
 styles.cell = (hidden) =>{
   return {
-    height: (gridSize / 3) - (cellMargin * 2),
-    width: (gridSize / 3) - (cellMargin * 2),
+    height: '25px',
+    width: '25px',
     background: hidden ? 'white' : 'cadetblue',
     margin: cellMargin,
     float: 'left',
