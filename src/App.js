@@ -18,7 +18,7 @@ class App extends Component {
 
     setTimeout(() => {
       this.socket.send('Hello World!');
-    }, 3000);
+    }, 1000);
 
   }
 
