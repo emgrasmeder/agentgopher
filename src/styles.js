@@ -6,6 +6,7 @@ styles.grid = {
   height: gridSize,
   width: gridSize,
   border: '3px solid black',
+background: 'darkslategrey',
 };
 
 const cellMargin = 1;
