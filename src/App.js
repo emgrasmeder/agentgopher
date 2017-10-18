@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
-import Grid from './Grid.js';
+import GridContainer from './containers/GridContainer.js';
 
 class App extends Component {
   render() {
     return (
       <div >
         Agent Gopher!
-        <Grid />
+        <GridContainer />
       </div >
     );
   }
 }
-
 
 export default App;

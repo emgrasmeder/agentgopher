@@ -25,7 +25,12 @@ class Grid extends Component {
   render() {
     const cells = [];
     Array.from(Array(324).keys()).forEach((n) => {
-      cells.push(<Cell key={n.toString()}/>)
+      cells.push(<Cell
+        key={n.toString()}
+        id={n}
+        becomeVisible={(n)=>this.props.becomeVisible(n)}
+        becomeInvisible={(n)=>this.props.becomeInvisible(n)}
+      />)
     });
 
     return (

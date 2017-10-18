@@ -6,8 +6,10 @@
     "bufferutil": "^3.0.2",
     "mock-socket": "^7.0.0",
     "react": "^15.6.1",
+    "react-redux": "^5.0.6",
     "react-scripts": "1.0.13",
     "react-websocket": "^1.1.7",
+    "redux": "^3.7.2",
     "utf-8-validate": "^3.0.3",
     "ws": "^3.1.0"
   },

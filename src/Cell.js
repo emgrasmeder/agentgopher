@@ -9,6 +9,9 @@ class Cell extends Component {
   }
 
   handleClick = () => {
+    this.state.hidden
+      ? this.props.becomeVisible(this.props.id)
+      : this.props.becomeInvisible(this.props.id)
     this.setState({hidden: !this.state.hidden});
   };
 
