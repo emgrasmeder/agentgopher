@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-import Grid from '../Grid.js';
+import Grid from '../components/Grid.js';
 
 const mapStateToProps = store => ({
     cells: store.cells.content,

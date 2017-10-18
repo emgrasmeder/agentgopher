@@ -1,5 +1,5 @@
 import React from 'react';
-import Grid from '../Grid';
+import Grid from '../components/Grid';
 import { mount, shallow } from 'enzyme';
 import { Server } from 'mock-socket';
 
