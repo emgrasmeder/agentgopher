@@ -5,7 +5,7 @@ describe('visibility actions', () => {
     const cellId = 1;
     expect(actions.becomeVisible(cellId)).toEqual({
       type: 'BECOME_VISIBLE',
-      id: cellId,
+      value: cellId,
     })
   })
 
@@ -13,7 +13,7 @@ describe('visibility actions', () => {
     const cellId = 1;
     expect(actions.becomeInvisible(cellId)).toEqual({
       type: 'BECOME_INVISIBLE',
-      id: cellId,
+      value: cellId,
     })
   })
 
