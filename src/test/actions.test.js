@@ -2,7 +2,7 @@ import * as actions from '../actions'
 import actionTypes from "../actionTypes";
 
 describe('visibility actions', () => {
-  it('become visible should use BECOME_VISIBILE with a cell id', () => {
+  it('become visible should use BECOME_VISIBILE with a cell', () => {
     const cellId = 1;
     const cell = { id: cellId, hidden: true };
     expect(actions.becomeVisible(cell)).toEqual({
@@ -14,7 +14,7 @@ describe('visibility actions', () => {
     })
   });
 
-  it('become invisible should use BECOME_INVISIBILE with a cell id', () => {
+  it('become invisible should use BECOME_INVISIBILE with a cell', () => {
     const cellId = 1;
     const cell = { id: cellId, hidden: false };
     expect(actions.becomeInvisible(cell)).toEqual({

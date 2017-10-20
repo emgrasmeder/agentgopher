@@ -3,38 +3,51 @@ import Grid from '../components/Grid';
 import { mount, shallow } from 'enzyme';
 import { Server } from 'mock-socket';
 
+Grid.defaultProps = {
+  setupDefault: jest.fn(),
+};
+
+
+const mockServer = new Server('ws://localhost:8080/echo');
 describe('Grid', () => {
-  const mockServer = new Server('ws://localhost:8080/echo');
 
-  it('should change state onMessage', (done) => {
-    expect.assertions(1);
-    const message = 'hello world';
-    mockServer.on('connection', server => {
+
+  describe('Websocket connection', () => {
+    it('should change state on default Message', (done) => {
+      expect.assertions(1);
+      const message = 'hello world';
+
+      const wrapper = shallow(<Grid websocket={mockServer} />);
       mockServer.send(message);
+
+      setTimeout(() => {
+        expect(wrapper.state().messages).toEqual(message)
+        done();
+      }, 100)
+
     });
-
-    const wrapper = shallow(<Grid websocket={mockServer} />);
-    setTimeout(() => {
-      console.log(wrapper.state().messages)
-      expect(wrapper.state().messages).toEqual(message)
-      done();
-    }, 10)
-
   });
 
-  describe.skip('Websocket connection', () => {
-    it('should do handshake', (done) => {
+  describe('Websocket message parsing', () => {
+    it('should dispatch setupDefault when receiving message of type SETUP_DEFAULT', (done) => {
+      expect.assertions(1);
+      const message = "SETUP_DEFAULT";
+      const setupDefaultMock = jest.fn();
+
       mockServer.on('connection', server => {
-        mockServer.send('test message 1');
-        mockServer.send('test message 2');
+        mockServer.send(message);
       });
 
-      const wrapper = mount(<Grid websocket={mockServer} />);
-      setTimeout(() => {
-        expect(wrapper.state().messages).toBe(999)
+      const wrapper = shallow(<Grid
+        setupDefault={setupDefaultMock}
+        websocket={mockServer}
+      />);
 
-        mockServer.stop(done);
-      }, 100);
+      setTimeout(() => {
+        expect(setupDefaultMock).toHaveBeenCalledTimes(1)
+        done();
+      }, 100)
+
     });
   });
 });

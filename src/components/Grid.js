@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styles from '../styles/styles';
 import Cell from '../components/Cell.js';
+import messageType from "../messageTypes";
 
 class Grid extends Component {
   constructor(props) {
@@ -8,10 +9,15 @@ class Grid extends Component {
     this.state = {
       messages: '',
     };
-    
+
     this.socket = new WebSocket('ws://localhost:8080/echo');
     this.socket.onmessage = (message) => {
-      this.setState({messages: message.data})
+      switch (message.data) {
+        case messageType.SETUP_DEFAULT:
+          this.props.setupDefault()
+        default:
+          this.setState({messages: message.data})
+      }
     };
   }
 
