@@ -4,18 +4,26 @@ import actionTypes from "../actionTypes";
 describe('visibility actions', () => {
   it('become visible should use BECOME_VISIBILE with a cell id', () => {
     const cellId = 1;
-    expect(actions.becomeVisible(cellId)).toEqual({
+    const cell = { id: cellId, hidden: true };
+    expect(actions.becomeVisible(cell)).toEqual({
       type: actionTypes.BECOME_VISIBLE,
-      value: cellId,
+      value: {
+        id: cellId,
+        hidden: false
+      }
     })
-  })
+  });
 
   it('become invisible should use BECOME_INVISIBILE with a cell id', () => {
     const cellId = 1;
-    expect(actions.becomeInvisible(cellId)).toEqual({
+    const cell = { id: cellId, hidden: false };
+    expect(actions.becomeInvisible(cell)).toEqual({
       type: actionTypes.BECOME_INVISIBLE,
-      value: cellId,
+      value: {
+        id: cellId,
+        hidden: true
+      }
     })
   })
+});
 
-})

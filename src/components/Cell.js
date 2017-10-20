@@ -4,7 +4,7 @@ import styles from '../styles/styles';
 class Cell extends Component {
   constructor(props) {
     super(props);
-    this.state = {hidden: false};
+    this.state = {hidden: true};
     this.handleClick = this.handleClick.bind(this);
   }
 
