@@ -14,9 +14,9 @@ class Grid extends Component {
     this.socket.onmessage = (message) => {
       switch (message.data) {
         case messageType.SETUP_DEFAULT:
-          this.props.setupDefault()
+          return this.props.setupDefault()
         default:
-          this.setState({messages: message.data})
+          return this.setState({messages: message.data})
       }
     };
   }
@@ -42,14 +42,19 @@ class Grid extends Component {
   render() {
     this.createCells();
     return (
-      <div
-        className="Grid"
-        style={styles.grid}
-      >
-        {this.cells}
+      <div className="Grid" style={styles.grid} >
+        {this.props.cells.map((cell, index) =>
+          (<Cell
+            key={index}
+            id={cell.id}
+            becomeVisible={()=>this.props.becomeVisible(cell.id)}
+            becomeInvisible={()=>this.props.becomeInvisible(cell.id)}
+          />),
+        )}
       </div >
     );
   }
 }
+
 
 export default Grid;

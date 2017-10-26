@@ -6,7 +6,19 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './reducers'
 
-const store = createStore(reducer);
+const cells = []
+for (var i = 0; i < 324; i++ ) {
+  cells.push({id: i, hidden: true})
+}
+
+const initialState = {
+  cells: cells,
+};
+
+const store = createStore(
+  reducer,
+  initialState,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 render(
   <Provider store={store}>

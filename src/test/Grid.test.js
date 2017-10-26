@@ -5,6 +5,7 @@ import { Server } from 'mock-socket';
 
 Grid.defaultProps = {
   setupDefault: jest.fn(),
+  cells: [{}],
 };
 
 
