@@ -16,21 +16,21 @@ describe('reducers', () => {
   it('should put fetched cells in state', () => {
     const oldState = { cells: [{ id: 1, hidden: true }] };
     const oldHiddenStatus = true;
-    const cell = { id: 1, hidden: oldHiddenStatus };
-    const action = actions.becomeVisible(cell);
+    const cell = oldState.cells[0];
+    const action = actions.becomeVisible(cell.id);
     const newState = reducer(oldState, action);
     expect(newState.cells[0].id).toBe(cell.id);
     expect(newState.cells[0].hidden).toBe(!oldHiddenStatus);
   });
 
   it('should only replace the changed cell', () => {
-    const oldState = { cells: [{ id: 1, hidden: true }, { id: 2, hidden: true }] };
-    const cellToChange = { id: 1 };
-    const action = actions.becomeVisible(cellToChange);
+    const oldState = { cells: [{ id: 1, hidden: false }, { id: 2, hidden: false }] };
+    const cellToChange = oldState.cells[0];
+    const action = actions.becomeInvisible(cellToChange.id);
     const newState = reducer(oldState, action);
     expect(newState.cells).toEqual([
-      { id: 1, hidden: false },
-      { id: 2, hidden: true }]);
+      { id: 1, hidden: true },
+      { id: 2, hidden: false }]);
   });
 
 });

@@ -7,8 +7,8 @@ const mapStateToProps = store => ({
 });
 
 const mapDispatchersToProps = dispatch => ({
-    becomeVisible: cellId => dispatch(actions.becomeVisible(cellId)),
-    becomeInvisible: cellId => dispatch(actions.becomeInvisible(cellId)),
+    becomeVisible: cell => dispatch(actions.becomeVisible(cell)),
+    becomeInvisible: cell => dispatch(actions.becomeInvisible(cell)),
 });
 
 const connectedGrid = connect(mapStateToProps, mapDispatchersToProps)(Grid);

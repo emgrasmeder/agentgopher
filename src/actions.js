@@ -1,11 +1,11 @@
 import actionTypes from './actionTypes';
 
-export const becomeVisible = cell => ({
+export const becomeVisible = cellId => ({
   type: actionTypes.BECOME_VISIBLE,
-  value: {...cell, hidden: false}
+  value: { id: cellId, hidden: false }
 });
 
-export const becomeInvisible = cell => ({
+export const becomeInvisible = cellId => ({
   type: actionTypes.BECOME_INVISIBLE,
-  value: {...cell, hidden: true},
+  value: { id: cellId, hidden: true },
 });

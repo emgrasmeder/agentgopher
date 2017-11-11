@@ -27,20 +27,7 @@ class Grid extends Component {
     }, 1000);
   }
 
-  createCells() {
-    this.cells = [];
-    Array.from(Array(324).keys()).forEach((n) => {
-      this.cells.push(<Cell
-        key={n.toString()}
-        id={n}
-        becomeVisible={(n)=>this.props.becomeVisible(n)}
-        becomeInvisible={(n)=>this.props.becomeInvisible(n)}
-      />)
-    });
-  };
-
   render() {
-    this.createCells();
     return (
       <div className="Grid" style={styles.grid} >
         {this.props.cells.map((cell, index) =>
@@ -49,6 +36,7 @@ class Grid extends Component {
             id={cell.id}
             becomeVisible={()=>this.props.becomeVisible(cell.id)}
             becomeInvisible={()=>this.props.becomeInvisible(cell.id)}
+            hidden={cell.hidden}
           />),
         )}
       </div >

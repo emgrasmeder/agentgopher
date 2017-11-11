@@ -6,15 +6,23 @@ const cellsReducer = (cells = [], action) => {
     case actionTypes.BECOME_VISIBLE:
       return cells.map(cell => {
         if (cell.id === action.value.id) {
-          cell = Object.assign({}, { id: cell.id, hidden: action.value.hidden })
+          cell = Object.assign({}, { ...cell, hidden: action.value.hidden })
         }
         return cell
       });
+    case actionTypes.BECOME_INVISIBLE:
+      return cells.map(cell => {
+        if (cell.id === action.value.id) {
+          cell = Object.assign({}, {...cell, hidden: action.value.hidden })
+        }
+        return cell
+      });
+
     default:
       return cells;
   }
 };
 
 export default combineReducers({
-    cells: cellsReducer,
+  cells: cellsReducer,
 });

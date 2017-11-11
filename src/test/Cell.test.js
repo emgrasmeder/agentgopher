@@ -1,20 +1,37 @@
 import React from 'react';
 import Cell from '../components/Cell';
-import {mount} from 'enzyme';
+import {mount, shallow} from 'enzyme';
 
 Cell.defaultProps = {
   id: 0,
   becomeInvisible: jest.fn(),
   becomeVisible: jest.fn(),
+  hidden: true,
 };
 
 describe('Cell', () => {
-  it('should change from not hidden to hidden (and back) on clicks',()=>{
-    const wrapper = mount(<Cell/>);
-    expect(wrapper.state().hidden).toEqual(true);
+  it('should change from hidden to not hidden on click',()=>{
+    const mockBecomeVisible = jest.fn();
+    const mockBecomeInvisible = jest.fn();
+    const wrapper = shallow(<Cell
+      hidden={true}
+      becomeVisible={mockBecomeVisible}
+    />);
+    expect(mockBecomeVisible).toHaveBeenCalledTimes(0);
     wrapper.simulate('click');
-    expect(wrapper.state().hidden).toEqual(false);
-    wrapper.simulate('click');
-    expect(wrapper.state().hidden).toEqual(true);
+    expect(mockBecomeVisible).toHaveBeenCalledTimes(1);
   });
+
+  it('should change from not hidden to hidden on click',()=>{
+    const mockBecomeVisible = jest.fn();
+    const mockBecomeInvisible = jest.fn();
+    const wrapper = shallow(<Cell
+      hidden={false}
+      becomeInvisible={mockBecomeInvisible}
+    />);
+    expect(mockBecomeInvisible).toHaveBeenCalledTimes(0);
+    wrapper.simulate('click');
+    expect(mockBecomeInvisible).toHaveBeenCalledTimes(1);
+  });
+
 });
