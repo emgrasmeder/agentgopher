@@ -8,15 +8,15 @@ class Cell extends Component {
   }
 
   handleClick = () => {
-    this.props.hidden
-      ? this.props.becomeVisible(this.props.id)
-      : this.props.becomeInvisible(this.props.id)
+    this.props.color === "white"
+      ? this.props.setCellColor(this.props.id, "cadetblue")
+      : this.props.setCellColor(this.props.id, "white")
   };
 
   render() {
     return (
       <div className="cell"
-        style={styles.cell(this.props.hidden)}
+        style={styles.cell(this.props.color)}
         onClick={this.handleClick}
       >
       </div >

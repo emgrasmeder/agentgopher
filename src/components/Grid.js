@@ -34,9 +34,8 @@ class Grid extends Component {
           (<Cell
             key={index}
             id={cell.id}
-            becomeVisible={()=>this.props.becomeVisible(cell.id)}
-            becomeInvisible={()=>this.props.becomeInvisible(cell.id)}
-            hidden={cell.hidden}
+            setCellColor={this.props.setCellColor}
+            color={cell.color}
           />),
         )}
       </div >

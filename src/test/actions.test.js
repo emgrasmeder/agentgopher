@@ -1,29 +1,29 @@
 import * as actions from '../actions'
 import actionTypes from "../actionTypes";
 
-describe('visibility actions', () => {
-  it('become visible should use BECOME_VISIBILE with a cell', () => {
+describe('color changing actions', () => {
+  it('should change a cell to cadetblue', () => {
     const cellId = 1;
-    const cell = { id: cellId, hidden: true };
-    expect(actions.becomeVisible(cellId)).toEqual({
-      type: actionTypes.BECOME_VISIBLE,
+    const cell = { id: cellId, color: "white" };
+    expect(actions.setCellColor(cellId, "cadetblue")).toEqual({
+      type: actionTypes.SET_CELL_COLOR,
       value: {
         id: cellId,
-        hidden: false
+        color: "cadetblue",
       }
     })
   });
 
-  it('become invisible should use BECOME_INVISIBILE with a cell', () => {
+  it('should change a cell to white', () => {
     const cellId = 1;
-    const cell = { id: cellId, hidden: false };
-    expect(actions.becomeInvisible(cellId)).toEqual({
-      type: actionTypes.BECOME_INVISIBLE,
+    const cell = { id: cellId, color: "cadetblue" };
+    expect(actions.setCellColor(cellId, "white")).toEqual({
+      type: actionTypes.SET_CELL_COLOR,
       value: {
         id: cellId,
-        hidden: true
+        color: "white",
       }
     })
-  })
+  });
 });
 

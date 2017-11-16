@@ -8,7 +8,7 @@ import reducer from './reducers'
 
 const cells = []
 for (var i = 0; i < 324; i++ ) {
-  cells.push({id: i, hidden: true})
+  cells.push({id: i, color: "white"})
 }
 
 const initialState = {

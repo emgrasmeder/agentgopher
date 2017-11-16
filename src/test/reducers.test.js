@@ -4,33 +4,32 @@ import * as actions from '../actions';
 
 describe('reducers', () => {
   it('should not mutate', () => {
-    const oldState = { cells: [{ id: 1, hidden: true }] };
+    const oldState = { cells: [{ id: 1, color: "white" }] };
     deepFreeze(oldState);
     const newState = reducer(oldState, {
-      type: 'BECOME_VISIBLE',
-      value: { id: 1, hidden: false }
+      type: 'SET_CELL_COLOR',
+      value: { id: 1, color: "cadetblue" }
     });
-    expect(newState).toEqual({ cells: [{ id: 1, hidden: false }] });
+    expect(newState).toEqual({ cells: [{ id: 1, color: "cadetblue" }] });
   });
 
   it('should put fetched cells in state', () => {
-    const oldState = { cells: [{ id: 1, hidden: true }] };
-    const oldHiddenStatus = true;
+    const oldState = { cells: [{ id: 1, color: "white" }] };
     const cell = oldState.cells[0];
-    const action = actions.becomeVisible(cell.id);
+    const action = actions.setCellColor(cell.id, "cadetblue");
     const newState = reducer(oldState, action);
     expect(newState.cells[0].id).toBe(cell.id);
-    expect(newState.cells[0].hidden).toBe(!oldHiddenStatus);
+    expect(newState.cells[0].color).not.toBe("white");
   });
 
   it('should only replace the changed cell', () => {
-    const oldState = { cells: [{ id: 1, hidden: false }, { id: 2, hidden: false }] };
+    const oldState = { cells: [{ id: 1, color: "cadetblue" }, { id: 2, color: "cadetblue" }] };
     const cellToChange = oldState.cells[0];
-    const action = actions.becomeInvisible(cellToChange.id);
+    const action = actions.setCellColor(cellToChange.id, "white");
     const newState = reducer(oldState, action);
     expect(newState.cells).toEqual([
-      { id: 1, hidden: true },
-      { id: 2, hidden: false }]);
+      { id: 1, color: "white" },
+      { id: 2, color: "cadetblue" }]);
   });
 
 });

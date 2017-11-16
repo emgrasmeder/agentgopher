@@ -10,11 +10,11 @@ background: 'darkslategrey',
 };
 
 const cellMargin = 1;
-styles.cell = (hidden) =>{
+styles.cell = (color) =>{
   return {
     height: '25px',
     width: '25px',
-    background: hidden ? 'white' : 'cadetblue',
+    background: color,
     margin: cellMargin,
     float: 'left',
   };
