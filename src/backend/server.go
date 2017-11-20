@@ -17,7 +17,7 @@ var upgrader = websocket.Upgrader{
 	CheckOrigin: func(r *http.Request) bool { return true },
 }
 
-func echo(w http.ResponseWriter, r *http.Request) {
+func handler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Handling connection from client...")
 	socket, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
@@ -45,7 +45,7 @@ func echo(w http.ResponseWriter, r *http.Request) {
 func main() {
 	flag.Parse()
 	log.SetFlags(0)
-	http.HandleFunc("/echo", echo)
+	http.HandleFunc("/", handler)
 	fmt.Println("Listening and serving at ", *addr)
 	log.Fatal(http.ListenAndServe(*addr, nil))
 }

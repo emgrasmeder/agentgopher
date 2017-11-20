@@ -9,7 +9,7 @@ Grid.defaultProps = {
 };
 
 
-const mockServer = new Server('ws://localhost:8080/echo');
+const mockServer = new Server('ws://localhost:8080');
 describe('Grid', () => {
   describe('Websocket message parsing', () => {
     it('should dispatch setCellColor when receiving message of type SETUP_DEFAULT', () => {

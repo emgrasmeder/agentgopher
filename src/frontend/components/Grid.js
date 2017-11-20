@@ -10,7 +10,7 @@ class Grid extends Component {
       messages: '',
     };
 
-    this.socket = new WebSocket('ws://localhost:8080/echo');
+    this.socket = new WebSocket('ws://localhost:8080');
     this.socket.onmessage = (payload) => {
       const message = JSON.parse(payload.data)
       switch (message.type) {
