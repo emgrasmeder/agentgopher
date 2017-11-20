@@ -32,10 +32,12 @@ func echo(w http.ResponseWriter, r *http.Request) {
 			break
 		}
 		log.Printf("Received message from client: %s", message)
-		err = socket.WriteMessage(messageType, []byte(`{"type":"announcement", "message":"ready"}`))
-		if err != nil {
-			log.Println("write:", err)
-			break
+		if string(message) == "ready" {
+			err = socket.WriteMessage(messageType, []byte(`{"type":"announcement", "message":"ready"}`))
+			if err != nil {
+				log.Println("write:", err)
+				break
+			}
 		}
 	}
 }
