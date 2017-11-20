@@ -11,19 +11,24 @@ class Grid extends Component {
     };
 
     this.socket = new WebSocket('ws://localhost:8080/echo');
-    this.socket.onmessage = (message) => {
-      switch (message.data) {
-        case messageType.SETUP_DEFAULT:
-          return this.props.setupDefault()
+    this.socket.onmessage = (payload) => {
+      const message = JSON.parse(payload.data)
+      switch (message.type) {
+        case messageType.update_color:
+          this.props.setCellColor(message.id, message.color);
+          break;
+        case 'announcement':
+          console.log("Received message from server: ", message);
+          break;
         default:
-          return this.setState({messages: message.data})
+          console.warn("Unexpected message type from server")
       }
     };
   }
 
   componentDidMount() {
     setTimeout(() => {
-      this.socket.send('Hello Server!');
+      this.socket.send('ready');
     }, 1000);
   }
 

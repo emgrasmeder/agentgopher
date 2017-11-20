@@ -1,5 +1,5 @@
 const messageTypes = {
-    SETUP_DEFAULT: 'SETUP_DEFAULT',
+    update_color: 'update_color',
 };
 
 export default messageTypes;

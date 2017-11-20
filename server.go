@@ -31,8 +31,8 @@ func echo(w http.ResponseWriter, r *http.Request) {
 			log.Println("read:", err)
 			break
 		}
-		log.Printf("Received message from client %s", message)
-		err = socket.WriteMessage(messageType, []byte("Handshake accepted."))
+		log.Printf("Received message from client: %s", message)
+		err = socket.WriteMessage(messageType, []byte(`{"type":"announcement", "message":"ready"}`))
 		if err != nil {
 			log.Println("write:", err)
 			break

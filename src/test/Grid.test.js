@@ -4,50 +4,31 @@ import { mount, shallow } from 'enzyme';
 import { Server } from 'mock-socket';
 
 Grid.defaultProps = {
-  setupDefault: jest.fn(),
+  setCellColor: jest.fn(),
   cells: [{}],
 };
 
 
 const mockServer = new Server('ws://localhost:8080/echo');
 describe('Grid', () => {
-
-
-  describe('Websocket connection', () => {
-    it('should change state on default Message', (done) => {
-      expect.assertions(1);
-      const message = 'hello world';
-
-      const wrapper = shallow(<Grid websocket={mockServer} />);
-      mockServer.send(message);
-
-      setTimeout(() => {
-        expect(wrapper.state().messages).toEqual(message)
-        done();
-      }, 100)
-
-    });
-  });
-
   describe('Websocket message parsing', () => {
-    it('should dispatch setupDefault when receiving message of type SETUP_DEFAULT', (done) => {
-      expect.assertions(1);
-      const message = "SETUP_DEFAULT";
-      const setupDefaultMock = jest.fn();
-
-      mockServer.on('connection', server => {
-        mockServer.send(message);
+    it('should dispatch setCellColor when receiving message of type SETUP_DEFAULT', () => {
+      const message = JSON.stringify({
+        type:"update_color",
+        id: 1,
+        color: "red"
       });
 
+      const setCellColorMock = jest.fn();
+
       const wrapper = shallow(<Grid
-        setupDefault={setupDefaultMock}
+        setCellColor={setCellColorMock}
         websocket={mockServer}
       />);
+      mockServer.send(message);
 
-      setTimeout(() => {
-        expect(setupDefaultMock).toHaveBeenCalledTimes(1)
-        done();
-      }, 100)
+      expect(setCellColorMock).toHaveBeenCalledTimes(1)
+      expect(setCellColorMock).toHaveBeenCalledWith(1, "red")
 
     });
   });
