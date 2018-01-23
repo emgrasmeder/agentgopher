@@ -12,13 +12,14 @@ class Grid extends Component {
 
     this.socket = new WebSocket('ws://localhost:8080');
     this.socket.onmessage = (payload) => {
-      const message = JSON.parse(payload.data)
-      switch (message.type) {
+      const messageFromServer = JSON.parse(payload.data);
+      switch (messageFromServer.type) {
         case messageType.update_color:
-          this.props.setCellColor(message.id, message.color);
+          this.props.setCellColor(messageFromServer.id, messageFromServer.color);
+          console.log('message from server: ', messageFromServer)
           break;
         case 'announcement':
-          console.log("Received message from server: ", message);
+          console.log("Received message from server: ", messageFromServer);
           break;
         default:
           console.warn("Unexpected message type from server")

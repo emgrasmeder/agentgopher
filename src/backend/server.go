@@ -8,6 +8,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/emilyagras/agentGopher/messages"
 	"github.com/gorilla/websocket"
 )
 
@@ -31,13 +32,9 @@ func handler(w http.ResponseWriter, r *http.Request) {
 			log.Println("read:", err)
 			break
 		}
-		log.Printf("Received message from client: %s", message)
-		if string(message) == "ready" {
-			err = socket.WriteMessage(messageType, []byte(`{"type":"announcement", "message":"ready"}`))
-			if err != nil {
-				log.Println("write:", err)
-				break
-			}
+		err = messages.ParseAndHandle(socket, string(message), messageType)
+		if err != nil {
+			break
 		}
 	}
 }
