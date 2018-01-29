@@ -1,6 +1,7 @@
 package messages
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/gorilla/websocket"
@@ -21,6 +22,7 @@ import (
 func ParseAndHandle(socket *websocket.Conn, message string, messageType int) (err error) {
 	log.Printf("Received message from client 1: %s", message)
 	if string(message) == "ready" {
+		fmt.Println("Writing {type:announcement, message:ready} to socket")
 		err = socket.WriteMessage(messageType, []byte(`{"type":"announcement", "message":"ready"}`))
 		//err = ClearAllCells(socket, messageType)
 	} else if string(message) == "update" {

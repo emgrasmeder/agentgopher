@@ -1,12 +1,13 @@
 import { combineReducers } from 'redux';
-import actionTypes from './actionTypes';
+import {SET_CELL_COLOR} from './actionTypes';
 
 const cellsReducer = (cells = [], action) => {
   switch (action.type) {
-    case actionTypes.SET_CELL_COLOR:
+    case SET_CELL_COLOR:
       return cells.map(cell => {
         if (cell.id === action.value.id) {
-          cell = Object.assign({}, { ...cell, color: action.value.color })
+          cell = Object.assign({}, { ...cell, color: action.value.color });
+          return cell
         }
         return cell
       });
@@ -15,6 +16,18 @@ const cellsReducer = (cells = [], action) => {
   }
 };
 
+const socketReducer = (state = {}, action) => {
+  switch (action.type) {
+    case 'WEBSOCKET:MESSAGE':
+      const data = JSON.parse(action.payload.data);
+      //TODO: parse message and change color
+      return { ...state, ...data}
+    default:
+      return state
+  }
+};
+
 export default combineReducers({
   cells: cellsReducer,
+  socket: socketReducer
 });

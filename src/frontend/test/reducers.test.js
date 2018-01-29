@@ -10,7 +10,7 @@ describe('reducers', () => {
       type: 'SET_CELL_COLOR',
       value: { id: 1, color: "cadetblue" }
     });
-    expect(newState).toEqual({ cells: [{ id: 1, color: "cadetblue" }] });
+    expect(newState.cells).toEqual([{ id: 1, color: "cadetblue" }]);
   });
 
   it('should put fetched cells in state', () => {
