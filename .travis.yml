@@ -1,6 +1,2 @@
-language: node_js
-node_js:
-  - "7"
-script: npm run test
-language: go
-script: go test ./...
+language: bash
+script: sh run.sh
