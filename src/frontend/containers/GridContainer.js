@@ -10,7 +10,7 @@ const mapStateToProps = store => ({
 const mapDispatchersToProps = dispatch => ({
   setCellColor: (id, color) => {
     dispatch(actions.setCellColor(id, color));
-    dispatch(actions.websocketSend({id, color}));
+    dispatch(actions.websocketSend(id, color));
   },
   socketConnect: (url) => dispatch(actions.websocketConnect(url)),
 })

@@ -20,7 +20,6 @@ const socketReducer = (state = {}, action) => {
   switch (action.type) {
     case 'WEBSOCKET:MESSAGE':
       const data = JSON.parse(action.payload.data);
-      //TODO: parse message and change color
       return { ...state, ...data}
     default:
       return state

@@ -5,7 +5,7 @@ import (
 )
 
 type manager struct {
-	agents []Agent
+	agents []*Agent
 	steps  int
 }
 
@@ -18,7 +18,7 @@ func CellManager() *manager {
 	once.Do(func() {
 		m = &manager{
 			steps:  0,
-			agents: []Agent{},
+			agents: []*Agent{},
 		}
 	})
 	return m
@@ -36,26 +36,47 @@ func (m *manager) CountAgents() int {
 	return len(m.agents)
 }
 
-func (m *manager) AddAgent(a Agent) {
+func ListAllAgents() []*Agent {
+	m := CellManager()
+	return m.agents
+}
+
+func AddAgent(a *Agent) {
+	m = CellManager()
 	m.agents = append(m.agents, a)
 }
 
 func (m *manager) Restart() {
 	m.steps = 0
-	m.agents = []Agent{}
+	m.agents = []*Agent{}
 }
 
 type Agent struct {
-	id    int
+	id    string
 	color string
 }
 
-func NewAgent() Agent {
-	a := Agent{id: m.CountAgents()}
-	m.AddAgent(a)
+func NewAgent(id, color string) *Agent {
+	a := &Agent{id: id, color: color}
+	AddAgent(a)
 	return a
 }
 
-func (a *Agent) Id() int {
+func (a *Agent) GetId() string {
 	return a.id
+}
+
+func (a *Agent) GetColor() string {
+	return a.color
+}
+
+func (a *Agent) SetColor(c string) {
+	a.color = c
+}
+
+func ResetGrid() {
+	defaultColor := "white"
+	for _, a := range ListAllAgents() {
+		a.SetColor(defaultColor)
+	}
 }

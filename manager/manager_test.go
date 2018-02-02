@@ -34,22 +34,19 @@ func Test_ManagerResetsEveryTest(t *testing.T) {
 }
 
 func Test_ManagerCanAddAgents(t *testing.T) {
-	m := CellManager()
-	m.AddAgent(Agent{})
+	AddAgent(&Agent{})
 	numAgents := m.CountAgents()
 	assert.Equal(t, numAgents, 1, "should be equal")
 }
 
-func Test_AgentHasId(t *testing.T) {
+func Test_ResetMakesAllAgentColorWhite(t *testing.T) {
 	m.Restart()
-	a := NewAgent()
-	assert.Equal(t, 0, a.Id(), "should be equal")
-}
+	a := NewAgent("111", "cadetblue")
+	a2 := NewAgent("222", "cadetblue")
+	a3 := NewAgent("333", "cadetblue")
 
-func Test_Agent_Id_Assigned_Consecutively(t *testing.T) {
-	m.Restart()
-	a := NewAgent()
-	a2 := NewAgent()
-	assert.Equal(t, 0, a.Id(), "should be equal")
-	assert.Equal(t, 1, a2.Id(), "should be equal")
+	ResetGrid()
+	assert.Equal(t, "white", a.GetColor(), "should be equal")
+	assert.Equal(t, "white", a2.GetColor(), "should be equal")
+	assert.Equal(t, "white", a3.GetColor(), "should be equal")
 }

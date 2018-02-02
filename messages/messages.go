@@ -5,6 +5,8 @@ import (
 	"log"
 
 	"github.com/gorilla/websocket"
+	"encoding/json"
+	"github.com/emilyagras/agentGopher/manager"
 )
 
 //func ClearAllCells(socket *websocket.Conn, messageType int) (err error) {
@@ -19,13 +21,31 @@ import (
 //	return nil
 //}
 
+type Response2 struct {
+	MessageType   string     `json:"messageType"`
+	Content map[string]string `json:"content"`
+}
+
 func ParseAndHandle(socket *websocket.Conn, message string, messageType int) (err error) {
-	log.Printf("Received message from client 1: %s", message)
-	if string(message) == "ready" {
-		fmt.Println("Writing {type:announcement, message:ready} to socket")
+	parsedMessage := Response2{}
+	json.Unmarshal([]byte(message), &parsedMessage)
+
+	log.Printf("Received message from client 1: %s", parsedMessage)
+	if parsedMessage.MessageType == "announcement" {
+		if parsedMessage.Content["message"] == "ready" {
 		err = socket.WriteMessage(messageType, []byte(`{"type":"announcement", "message":"ready"}`))
-		//err = ClearAllCells(socket, messageType)
-	} else if string(message) == "update" {
+		manager.ResetGrid()
+		}
+	} else if parsedMessage.MessageType == "update" {
+		id := parsedMessage.Content["id"]
+		color := parsedMessage.Content["color"]
+		manager.NewAgent(id, color)
+	}
+
+
+
+	if message == "update" {
+		fmt.Println("sending a message")
 		err = socket.WriteMessage(messageType, []byte(`{"type":"announcement", "message":"ready"}`))
 	}
 	return err
