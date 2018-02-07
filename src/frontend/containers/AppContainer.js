@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-import Grid from '../components/Grid.js';
+import App from '../components/App.js';
 
 const mapStateToProps = store => ({
   cells: store.cells,
@@ -9,12 +9,13 @@ const mapStateToProps = store => ({
 const mapDispatchersToProps = dispatch => ({
   setCellColor: (id, color) => {
     dispatch(actions.setCellColor(id, color));
-    dispatch(actions.websocketSend(id, color));
+    dispatch(actions.sendCellUpdate(id, color));
   },
   socketConnect: (url) => dispatch(actions.websocketConnect(url)),
+  clearAll: () => dispatch(actions.sendClearAll())
 })
 ;
 
-const connectedGrid = connect(mapStateToProps, mapDispatchersToProps)(Grid);
+const connectedApp = connect(mapStateToProps, mapDispatchersToProps)(App);
 
-export default connectedGrid;
+export default connectedApp;

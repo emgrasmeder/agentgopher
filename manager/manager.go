@@ -2,6 +2,7 @@ package manager
 
 import (
 	"sync"
+	"github.com/gorilla/websocket"
 )
 
 type manager struct {
@@ -74,8 +75,13 @@ func (a *Agent) SetColor(c string) {
 	a.color = c
 }
 
-func ResetGrid() {
+func ResetGrid(socket *websocket.Conn) {
 	defaultColor := "white"
+	//defaultCellCount := "324"
+	err := socket.WriteMessage(1, []byte(`{"message":"initialize", "cellCount": "324", "color": "white"}`))
+	if err != nil {
+		panic(err)
+	}
 	for _, a := range ListAllAgents() {
 		a.SetColor(defaultColor)
 	}

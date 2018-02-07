@@ -1,7 +1,6 @@
 package messages
 
 import (
-	"fmt"
 	"log"
 
 	"github.com/gorilla/websocket"
@@ -22,31 +21,29 @@ import (
 //}
 
 type Response2 struct {
-	MessageType   string     `json:"messageType"`
-	Content map[string]string `json:"content"`
+	MessageType string            `json:"messageType"`
+	Content     map[string]string `json:"content"`
 }
 
-func ParseAndHandle(socket *websocket.Conn, message string, messageType int) (err error) {
+func ParseAndHandle(socket *websocket.Conn, message string) (err error) {
 	parsedMessage := Response2{}
 	json.Unmarshal([]byte(message), &parsedMessage)
 
 	log.Printf("Received message from client 1: %s", parsedMessage)
 	if parsedMessage.MessageType == "announcement" {
 		if parsedMessage.Content["message"] == "ready" {
-		err = socket.WriteMessage(messageType, []byte(`{"message":"initialize", "cellCount": "324", "color": "white"}`))
-		manager.ResetGrid()
+			manager.ResetGrid(socket)
 		}
 	} else if parsedMessage.MessageType == "update" {
 		id := parsedMessage.Content["id"]
 		color := parsedMessage.Content["color"]
 		manager.NewAgent(id, color)
 	}
-
-
-
 	if message == "update" {
-		fmt.Println("sending a message")
-		err = socket.WriteMessage(messageType, []byte(`{"type":"announcement", "message":"ready"}`))
+		err = socket.WriteMessage(1, []byte(`{"type":"announcement", "message":"ready"}`))
+	}
+	if parsedMessage.MessageType == "clear_all" {
+		manager.ResetGrid(socket)
 	}
 	return err
 }

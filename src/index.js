@@ -1,5 +1,5 @@
 import './frontend/styles/index.css';
-import App from './frontend/components/App';
+import AppContainer from './frontend/containers/AppContainer';
 import React from 'react'
 import { render } from 'react-dom'
 import { createStore, applyMiddleware, compose } from 'redux'
@@ -22,7 +22,7 @@ const store = createStore(reducer, initialState, enhancer);
 
 render(
   <Provider store={store} >
-    <App />
+    <AppContainer />
   </Provider >,
   document.getElementById('root')
 );

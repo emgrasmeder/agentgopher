@@ -10,7 +10,12 @@ export const websocketConnect = (url = 'ws://localhost:8080') => ({
   payload: { url }
 });
 
-export const websocketSend = (id, color) => ({
+export const sendCellUpdate = (id, color) => ({
   type: 'WEBSOCKET:SEND',
   payload: { messageType: 'update', content: {id: id.toString(), color: color.toString()} }
+});
+
+export const sendClearAll = () => ({
+  type: 'WEBSOCKET:SEND',
+  payload: { messageType: 'clear_all' }
 });

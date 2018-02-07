@@ -3,11 +3,6 @@ import styles from '../styles/styles';
 import Cell from '../components/Cell.js';
 
 class Grid extends Component {
-  constructor(props) {
-    super(props);
-    this.props.socketConnect()
-  }
-
   render() {
     var cells = this.props.cells ?
       this.props.cells.map((cell, index) =>

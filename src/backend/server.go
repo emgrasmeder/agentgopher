@@ -27,12 +27,12 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	}
 	defer socket.Close()
 	for {
-		messageType, message, err := socket.ReadMessage()
+		_, message, err := socket.ReadMessage()
 		if err != nil {
 			log.Println("read:", err)
 			break
 		}
-		err = messages.ParseAndHandle(socket, string(message), messageType)
+		err = messages.ParseAndHandle(socket, string(message))
 		if err != nil {
 			break
 		}
