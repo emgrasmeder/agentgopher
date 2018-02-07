@@ -3,7 +3,6 @@ let websocket;
 export const websocketMiddleware = store => next => action => {
   switch (action.type) {
     case 'WEBSOCKET:CONNECT':
-      //TODO: Should reset frontend and clear Agents state when connection handshake is successful
       websocket = new WebSocket(action.payload.url);
       websocket.onopen = () => websocket.send(JSON.stringify({
         messageType: 'announcement',
@@ -13,7 +12,6 @@ export const websocketMiddleware = store => next => action => {
       websocket.onmessage = (event) => store.dispatch({ type: 'WEBSOCKET:MESSAGE', payload: event });
       break;
     case 'WEBSOCKET:SEND':
-      console.log("trying to send: ",action.payload)
       websocket.send(JSON.stringify(action.payload));
       break;
     case 'WEBSOCKET:DISCONNECT':

@@ -7,15 +7,9 @@ import { Provider } from 'react-redux'
 import reducer from './frontend/reducers'
 import { websocketMiddleware } from './frontend/websocket'
 
-const cells = [];
-for (var i = 0; i < 324; i++) {
-  cells.push({ id: i, color: "white" })
-}
-
 const initialState = {
-  cells: cells,
+  cells: [],
 };
-
 
 const composeEnhancers =
   typeof window === 'object' &&

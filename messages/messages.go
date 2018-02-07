@@ -33,7 +33,7 @@ func ParseAndHandle(socket *websocket.Conn, message string, messageType int) (er
 	log.Printf("Received message from client 1: %s", parsedMessage)
 	if parsedMessage.MessageType == "announcement" {
 		if parsedMessage.Content["message"] == "ready" {
-		err = socket.WriteMessage(messageType, []byte(`{"type":"announcement", "message":"ready"}`))
+		err = socket.WriteMessage(messageType, []byte(`{"message":"initialize", "cellCount": "324", "color": "white"}`))
 		manager.ResetGrid()
 		}
 	} else if parsedMessage.MessageType == "update" {

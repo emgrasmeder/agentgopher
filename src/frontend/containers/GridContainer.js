@@ -4,7 +4,6 @@ import Grid from '../components/Grid.js';
 
 const mapStateToProps = store => ({
   cells: store.cells,
-  socket: store.socket,
 });
 
 const mapDispatchersToProps = dispatch => ({

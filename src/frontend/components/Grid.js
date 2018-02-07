@@ -9,16 +9,18 @@ class Grid extends Component {
   }
 
   render() {
+    var cells = this.props.cells ?
+      this.props.cells.map((cell, index) =>
+        (<Cell
+          key={index}
+          id={cell.id}
+          setCellColor={this.props.setCellColor}
+          color={cell.color}
+        />)) : <div/>;
+
     return (
       <div className="Grid" style={styles.grid} >
-        {this.props.cells.map((cell, index) =>
-          (<Cell
-            key={index}
-            id={cell.id}
-            setCellColor={this.props.setCellColor}
-            color={cell.color}
-          />),
-        )}
+        {cells}
       </div >
     );
   }
