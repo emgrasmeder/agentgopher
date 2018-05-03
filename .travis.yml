@@ -1,13 +1,3 @@
-matrix:
-  include:
-    - language: go
-      go: 
-        - 1.9
-      script:
-        - go test ./...
-    - language: node_js
-      node_js:
-        - "7"
-      script:
-        - npm test
-
+language: node_js
+node_js:
+  - "7"
