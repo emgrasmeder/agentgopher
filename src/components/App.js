@@ -5,7 +5,7 @@ class App extends Component {
   render() {
     return (
       <div >
-        Agent Gopher!
+        Agent <strike>Gopher</strike><bold> Clojure</bold>!
         <GridContainer />
       </div >
     );

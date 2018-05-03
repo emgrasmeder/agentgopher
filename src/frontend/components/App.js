@@ -10,7 +10,6 @@ class App extends Component {
   render() {
     return (
       <div >
-        Agent Gopher!
         <Grid
           cells={this.props.cells}
           setCellColor={this.props.setCellColor}
